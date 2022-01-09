@@ -1,24 +1,60 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |
+| nickname           | string | null: false               |
+| email              | string | null: false               |
+| encrypted_password | string | null: false, unique: true |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :product_info
+- has_many :purchase_record, through:product_info 
 
-* Configuration
+## purchase_record テーブル
 
-* Database creation
+| Column            | Type       | Options                        |
+| ----------------- | ---------- | ------------------------------ |
+| buyer             | references | null: false, foreign_key: true |
+| shipping_address  | string     | null: false                    |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+- has_many :users, through:product_info
+- belongs_to :product_info
+- has_one :address
 
-* Services (job queues, cache servers, search engines, etc.)
+## product_info テーブル
 
-* Deployment instructions
+| Column               | Type       | Options                        |
+| -------------------- | ---------- | ------------------------------ |
+| photo                | string     | null: false                    |
+| product_name         | string     | null: false                    |
+| product_explanations | string     | null: false                    |
+| category             | string     | null: false                    |
+| status               | string     | null: false                    |
+| delivery_fee         | string     | null: false                    |
+| ship_from            | string     | null: false                    |
+| price                | string     | null: false                    |
+| seller               | references | null: false, foreign_key: true |
 
-* ...
+### Association
+
+- has_one :purchase_record
+- 
+
+## address テーブル
+
+| Column         | Type       | Options                        |
+| -------------- | ---------- | ------------------------------ |
+| post_code      | string     |                                |
+| prefectures    | string     | null: false                    |
+| municipalities | string     | null: false                    |
+| address        | string     | null: false                    |
+| phone-number   | references | null: false, foreign_key: true |
+
+### Association
+
+- has_many : purchase_record
