@@ -5,45 +5,45 @@
 | Column             | Type   | Options                   |
 | ------------------ | ------ | ------------------------- |
 | nickname           | string | null: false               |
-| email              | string | null: false               |
+| email              | string | null: false, unique: true |
 | encrypted_password | string | null: false, unique: true |
+| first_name         | string | null: false               |
+| last_name          | string | null: false               |
+| date_of_birth      | string | null: false               |
 
 ### Association
 
-- has_many :product_info
-- has_many :purchase_record, through:product_info 
+- has_many :product_details
+- has_many :purchase_record
 
-## purchase_record テーブル
+## purchase_records テーブル
 
 | Column            | Type       | Options                        |
 | ----------------- | ---------- | ------------------------------ |
-| buyer             | references | null: false, foreign_key: true |
-| shipping_address  | string     | null: false                    |
+| users             | references | null: false, foreign_key: true |
+| product_details   | references | null: false, foreign_key: true |
 
 ### Association
 
-- has_many :users, through:product_info
-- belongs_to :product_info
+- belongs_to :users
 - has_one :address
 
-## product_info テーブル
+## product_details テーブル
 
 | Column               | Type       | Options                        |
 | -------------------- | ---------- | ------------------------------ |
-| photo                | string     | null: false                    |
 | product_name         | string     | null: false                    |
-| product_explanations | string     | null: false                    |
-| category             | string     | null: false                    |
-| status               | string     | null: false                    |
-| delivery_fee         | string     | null: false                    |
+| product_explanations | text       | null: false                    |
+| category_id          | integer    | null: false                    |
+| status_id            | integer    | null: false                    |
+| delivery_fee_id      | integer    | null: false                    |
 | ship_from            | string     | null: false                    |
-| price                | string     | null: false                    |
-| seller               | references | null: false, foreign_key: true |
+| price                | integer    | null: false                    |
+| users                | references | null: false, foreign_key: true |
 
 ### Association
 
 - has_one :purchase_record
-- 
 
 ## address テーブル
 
@@ -52,9 +52,10 @@
 | post_code      | string     |                                |
 | prefectures    | string     | null: false                    |
 | municipalities | string     | null: false                    |
+| building_name  | string     |                                |
 | address        | string     | null: false                    |
-| phone-number   | references | null: false, foreign_key: true |
+| phone_number   | string     | null: false                    |
 
 ### Association
 
-- has_many : purchase_record
+- belongs_to : purchase_record
