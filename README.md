@@ -27,40 +27,40 @@
 
 ### Association
 
-- belongs_to :product_details
+- belongs_to :product_detail
+- has_one :user
 - has_one :address
-- has_one :product_detail
 
 ## product_details テーブル
 
 | Column               | Type       | Options                        |
 | -------------------- | ---------- | ------------------------------ |
 | product_name         | string     | null: false                    |
-| product_explanations | text       | null: false                    |
+| product_explanation  | text       | null: false                    |
 | category_id          | integer    | null: false                    |
 | status_id            | integer    | null: false                    |
 | delivery_fee_id      | integer    | null: false                    |
-| prefectures_id       | integer    | null: false                    |
+| prefecture_id        | integer    | null: false                    |
 | days_to_ship_id      | integer    | null: false                    |
 | price                | integer    | null: false                    |
 | user                 | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :users
-- has_many :purchase_records
+- has_one :user
+- has_one :purchase_record
 
-## address テーブル
+## addresses テーブル
 
 | Column         | Type       | Options                        |
 | -------------- | ---------- | ------------------------------ |
 | post_code      | string     | null: false                    |
-| prefectures_id | integer    | null: false                    |
-| municipalities | string     | null: false                    |
+| prefecture_id  | integer    | null: false                    |
+| municipality   | string     | null: false                    |
 | building_name  | string     |                                |
 | address        | string     | null: false                    |
 | phone_number   | string     | null: false                    |
-| purchase_record| string     | null: false, foreign_key: true |
+| purchase_record| references | null: false, foreign_key: true |
 
 ### Association
 
