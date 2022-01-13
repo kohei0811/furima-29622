@@ -27,9 +27,9 @@
 
 ### Association
 
-- belongs_to :users
+- belongs_to :product_details
 - has_one :address
-- has_one :product_details
+- has_one :product_detail
 
 ## product_details テーブル
 
@@ -40,15 +40,15 @@
 | category_id          | integer    | null: false                    |
 | status_id            | integer    | null: false                    |
 | delivery_fee_id      | integer    | null: false                    |
-| ship_from            | string     | null: false                    |
-| days_to_ship         | integer    | null: false                    |
+| prefectures_id       | integer    | null: false                    |
+| days_to_ship_id      | integer    | null: false                    |
 | price                | integer    | null: false                    |
-| users                | references | null: false, foreign_key: true |
+| user                 | references | null: false, foreign_key: true |
 
 ### Association
 
-- has_one :users
-- has_one :purchase_records
+- belongs_to :users
+- has_many :purchase_records
 
 ## address テーブル
 
