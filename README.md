@@ -29,7 +29,6 @@
 
 - belongs_to :product_detail
 - belongs_to :user
-- has_one :user
 - has_one :address
 
 ## product_details テーブル
