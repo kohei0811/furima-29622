@@ -28,6 +28,7 @@
 ### Association
 
 - belongs_to :product_detail
+- belongs_to :user
 - has_one :user
 - has_one :address
 
@@ -47,7 +48,7 @@
 
 ### Association
 
-- has_one :user
+- belongs_to :user
 - has_one :purchase_record
 
 ## addresses テーブル
