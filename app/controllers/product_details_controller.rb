@@ -18,6 +18,10 @@ class ProductDetailsController < ApplicationController
     end
   end
 
+  def show
+    @product_detail = ProductDetail.find(params[:id])
+  end
+
   private
   def product_detail_params
     params.require(:product_detail).permit(:image, :product_name, :product_explanation, :category_id, :status_id, :delivery_fee_id, :prefecture_id, :days_to_ship_id, :price).merge(user_id: current_user.id)
