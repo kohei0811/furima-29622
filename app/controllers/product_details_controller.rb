@@ -1,5 +1,9 @@
 class ProductDetailsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: :new
+
+  def index
+    @product_details = ProductDetail.all.order("created_at DESC")
+  end
 
   def new
     @product_detail = ProductDetail.new
