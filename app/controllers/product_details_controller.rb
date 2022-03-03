@@ -37,8 +37,12 @@ class ProductDetailsController < ApplicationController
   end
 
   def destroy
-    @product_detail.destroy
-    redirect_to product_details_path, method: :get
+    if user_signed_in? && current_user.id == @product_detail.user_id
+      @product_detail.destroy
+      redirect_to product_details_path, method: :get
+    else
+      render :edit
+    end
   end
 
   private
