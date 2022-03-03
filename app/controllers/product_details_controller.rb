@@ -1,6 +1,6 @@
 class ProductDetailsController < ApplicationController
   before_action :authenticate_user!, only: :new
-  before_action :set_product, only: [:show, :edit, :update]
+  before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   def index
     @product_details = ProductDetail.all.order("created_at DESC")
@@ -30,9 +30,18 @@ class ProductDetailsController < ApplicationController
 
   def update
     if @product_detail.update(product_detail_params)
-      redirect_to product_detail_path
+      redirect_to product_detail_path, method: :get
     else
      render :edit
+    end
+  end
+
+  def destroy
+    if user_signed_in? && current_user.id == @product_detail.user_id
+      @product_detail.destroy
+      redirect_to product_details_path, method: :get
+    else
+      render :edit
     end
   end
 
