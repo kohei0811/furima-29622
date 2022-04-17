@@ -3,6 +3,9 @@ class PurchaseRecordsController < ApplicationController
   def index
     @product_detail = ProductDetail.find(params[:product_detail_id])
     @address_purchase = AddressPurchase.new
+     if !user_signed_in? || @product_detail.purchase_record.present? || current_user.id == @product_detail.user_id
+      redirect_to root_path
+     end
   end
 
   def create
