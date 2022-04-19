@@ -23,8 +23,8 @@ class ProductDetailsController < ApplicationController
   end
 
   def edit
-    if !user_signed_in? || !current_user.id == @product_detail.user_id
-      render :show
+    if user_signed_in? && !current_user.id == @product_detail.user_id
+      redirect_to root_path
     elsif @product_detail.purchase_record.present?
       redirect_to root_path
     end
