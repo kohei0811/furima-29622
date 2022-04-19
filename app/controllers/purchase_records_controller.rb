@@ -1,7 +1,7 @@
 class PurchaseRecordsController < ApplicationController
+  before_action :set_product, only: [:index, :create]
 
   def index
-    @product_detail = ProductDetail.find(params[:product_detail_id])
     @address_purchase = AddressPurchase.new
      if !user_signed_in?
       redirect_to new_user_session_path
@@ -11,7 +11,6 @@ class PurchaseRecordsController < ApplicationController
   end
 
   def create
-    @product_detail = ProductDetail.find(params[:product_detail_id])
     @address_purchase = AddressPurchase.new(purchase_record_params)
      if @address_purchase.valid?
       pay_product
@@ -35,6 +34,10 @@ class PurchaseRecordsController < ApplicationController
       card: purchase_record_params[:token],
       currency: 'jpy'
     )
+  end
+
+  def set_product
+    @product_detail = ProductDetail.find(params[:product_detail_id])
   end
 
 

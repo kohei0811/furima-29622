@@ -7,8 +7,10 @@ class AddressPurchase
     validates :prefecture_id
     validates :municipality
     validates :address
-    validates :phone_number,format: { with: /\A\d{11}\z/, message: 'はハイフン無しの11桁である必要があります' }
+    validates :phone_number,format: { with: /\A\d{10,11}\z/, message: 'はハイフン無しの10桁か11桁である必要があります' }
     validates :token, presence: true
+    validates :user_id
+    validates :product_detail_id
   end
 
   def save
