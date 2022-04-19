@@ -1,6 +1,6 @@
 class AddressPurchase
   include ActiveModel::Model
-  attr_accessor :image, :user_id, :product_detail_id, :post_code, :prefecture_id, :municipality, :address, :building_name, :phone_number, :token
+  attr_accessor :user_id, :product_detail_id, :post_code, :prefecture_id, :municipality, :address, :building_name, :phone_number, :token
 
   with_options presence: true do
     validates :post_code,format: { with: /\A\d{3}[-]\d{4}\z/, message: 'はハイフンを含む必要があります' }
