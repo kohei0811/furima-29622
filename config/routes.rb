@@ -5,5 +5,7 @@ Rails.application.routes.draw do
 
   root 'product_details#index'
   resources :users, only: :index
-  resources :product_details
+  resources :product_details do
+    resources :purchase_records, only: [:index, :create]
+  end
 end
