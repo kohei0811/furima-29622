@@ -23,7 +23,9 @@ class ProductDetailsController < ApplicationController
   end
 
   def edit
-    if user_signed_in? && !current_user.id == @product_detail.user_id
+    if !user_signed_in?
+      redirect_to new_user_session_path
+    elsif current_user.id != @product_detail.user_id
       redirect_to root_path
     elsif @product_detail.purchase_record.present?
       redirect_to root_path

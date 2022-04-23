@@ -15,7 +15,7 @@ class PurchaseRecordsController < ApplicationController
      if @address_purchase.valid?
       pay_product
       @address_purchase.save
-      redirect_to root_path
+      return redirect_to root_path
      else
       render action: :index
      end
